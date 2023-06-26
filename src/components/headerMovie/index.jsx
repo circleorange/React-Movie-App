@@ -5,6 +5,8 @@ import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import HomeIcon from "@mui/icons-material/Home";
+import {useParams} from "react-router-dom";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const styles = {
     root: {  
@@ -17,13 +19,24 @@ const styles = {
 };
 
 const MovieHeader = (props) => {
-  const movie = props.movie;
+	const movie = props.movie;
+	const { id } = useParams();
+	const favMovies = JSON.parse(localStorage.getItem("favourites"));
+
+	let isMovieFavourite = false;
+	for (const favMovie of favMovies) {
+		if (favMovie.id == id) { isMovieFavourite = true; }
+	};
 
   return (
     <Paper component="div" sx={styles.root}>
       <IconButton aria-label="go back">
         <ArrowBackIcon color="primary" fontSize="large" />
       </IconButton>
+
+	{isMovieFavourite && (
+		<FavoriteIcon color="primary" fontSize="large" />
+	    )}
 
       <Typography variant="h4" component="h3">
         {movie.title}{"   "}
