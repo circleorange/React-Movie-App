@@ -10,7 +10,8 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import SortIcon from '@mui/icons-material/Sort';
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-
+import { useQuery } from "react-query";
+import Spinner from "../spinner";
 
 const styles = {
   root: {
@@ -26,27 +27,20 @@ const styles = {
 };
 
 export default function FilterMoviesCard(props) {
-  const [genres, setGenres] = useState([{ id: '0', name: "All" }])
-
-  useEffect(() => {
-	  getGenres().then((allGenres) => {
-		  setGenres([genres[0], ...allGenres]);
-	  })
-	  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const handleChange = (e, type, value) => {
+	const {data, error, isLoading, isError} = useQuery("genres", getGenres);
+	
+	if (isLoading) {return <Spinner />;}
+	if (isError) {return <h1>{error.message}</h1>;}
+	
+	const genres = data.genres;
+	if (genres[0].name !== "All") {genres.unshift({id: "0", name: "All"});}
+	
+	const handleUserImput = (e, type, value) => {
     e.preventDefault();
     props.onUserInput(type, value);
   };
-
-  const handleTextChange = e => {
-    handleChange(e, "title", e.target.value)
-  }
-
-  const handleGenreChange = e => {
-    handleChange(e, "genre", e.target.value)
-  };
+  const handleTextChange = (e, props) => {handleUserImput(e, "title", e.target.value);};
+  const handleGenreChange = (e) => {handleUserImput(e, "genre", e.target.value);};
 
   return (
     <>
