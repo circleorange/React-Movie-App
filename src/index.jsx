@@ -13,6 +13,7 @@ import MoviesContextProvider from "./contexts/moviesContext";
 import AddMovieReviewPage from "./pages/addMovieReviewPage";
 import PopularMoviesPage from "./pages/popularMoviesPage";
 import PeoplePage from "./pages/peoplePage";
+import MenuOptionsContext from "./contexts/menuOptionsContext";
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -24,31 +25,40 @@ const queryClient = new QueryClient({
 	},
 });
 
-const App = () => {
-  return(
-		<QueryClientProvider client={queryClient}>
-			<BrowserRouter>
-			<SiteHeader />
-				<MoviesContextProvider>
-	    <Routes>
-	      <Route 
-		      path="/movies/favourites"
-		      element={ <FavouriteMoviesPage /> } 
-	      />
-        <Route path="/movies/:id" element={ <MoviePage /> } />
-        <Route path="/" element={ <HomePage /> } />
-        <Route path="*" element={ <Navigate to="/" /> } />
-				<Route path="/reviews/:id" element={<MovieReviewPage/>} />
-				<Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
-				<Route path="/reviews/form" element={<AddMovieReviewPage/>} />
-				<Route path="/movies/popular" element={<PopularMoviesPage />} />
-				<Route path="/people" element={<PeoplePage />} />
-      </Routes>
-</MoviesContextProvider>
-    </BrowserRouter>
-			<ReactQueryDevtools initialIsOpen={false} />
-</QueryClientProvider>
+const menuOptions = [
+  { label: "Home", path: "/" },
+  { label: "Upcoming", path: "/movies/upcoming" },
+  { label: "Popular", path: "/movies/popular" },
+  { label: "Favorites", path: "/movies/favourites" },
+  { label: "Top Actors", path: "/people" },
+];
 
+const App = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <MenuOptionsContext.Provider value={menuOptions}>
+        <BrowserRouter>
+          <SiteHeader />
+          <MoviesContextProvider>
+            <Routes>
+              <Route
+                path="/movies/favourites"
+                element={<FavouriteMoviesPage />}
+              />
+              <Route path="/movies/:id" element={<MoviePage />} />
+              <Route path="/" element={<HomePage />} />
+              <Route path="*" element={<Navigate to="/" />} />
+              <Route path="/reviews/:id" element={<MovieReviewPage />} />
+              <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
+              <Route path="/reviews/form" element={<AddMovieReviewPage />} />
+              <Route path="/movies/popular" element={<PopularMoviesPage />} />
+              <Route path="/people" element={<PeoplePage />} />
+            </Routes>
+          </MoviesContextProvider>
+        </BrowserRouter>
+      </MenuOptionsContext.Provider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 };
 

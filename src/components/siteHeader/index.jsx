@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -11,6 +11,7 @@ import Menu from "@mui/material/Menu";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import MenuOptionsContext from "../../contexts/menuOptionsContext";
 
 const styles = {
   title: {
@@ -27,13 +28,7 @@ const SiteHeader = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
 
-  const menuOptions = [
-    { label: "Home", path: "/" },
-    { label: "Upcoming", path: "/movies/upcoming" },
-    { label: "Popular", path: "/movies/popular" },
-    { label: "Favorites", path: "/movies/favourites" },
-		{ label: "Top Actors", path: "/people" },
-  ];
+	const menuOptions = useContext(MenuOptionsContext);
 
   const handleMenuSelect = (pageURL) => {
     navigate(pageURL);
