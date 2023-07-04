@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import MovieDetails from "../components/movieDetails";
 import PageTemplate from "../components/templateMoviePage";
-import { getMovie, getMovieCredits } from "../api/tmdb-api";
+import { getMovie, getMovieCast } from "../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 
@@ -16,7 +16,8 @@ const MovieDetailsPage = (props) => {
 
 	async function test() {
 		if (id != null) {
-			let response = await getMovieCredits(id);
+			let response = await getMovieCast(id);
+			console.log(response);
 		}
 	};
 	test();

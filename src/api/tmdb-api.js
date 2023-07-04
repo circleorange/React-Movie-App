@@ -41,12 +41,52 @@ export const getMovieImages = ({queryKey}) => {
 	return fetchData(movieImageAPI);
 };
 
-export const getMovieReviews = async (id) => {
+export const getMovieReviews = (id) => {
 	const movieReviewsAPI=`https://api.themoviedb.org/3/movie/${id}/reviews`;
-	return (await fetchData(movieReviewsAPI)).results;
+	return fetchData(movieReviewsAPI)
+		.then(response=>{return response.results});
 };
 
-export const getMovieCredits = (id) => {
-	const movieCreditsAPI=`https://api.themoviedb.org/3/movie/${id}/credits`;
-	return fetchData(movieCreditsAPI);
+export const getMovieCast = (id) => {
+	const movieCastAPI=`https://api.themoviedb.org/3/movie/${id}/credits`;
+	return fetchData(movieCastAPI)
+		.then((response) => {
+			response.cast.sort((a,b) => b.popularity - a.popularity);
+			return response.cast;
+		});
 };
+
+export const getPopularMovies = () => {
+	const popularMoviesAPI="https://api.themoviedb.org/3/movie/popular";
+	return fetchData(popularMoviesAPI)
+		.then((response) => {
+			response.results.sort((a,b) => b.popularity - a.popularity);
+			return response;
+		});
+};
+
+export const getPersonDetails = (id) => {
+	const personDetailsAPI=`https://api.themoviedb.org/3/person/${id}`;
+	return fetchData(personDetailsAPI);
+};
+
+// can also be used to filter for only movies or TV
+export const getPersonCredits = (id) => {
+	const personCreditsAPI=`https://api.themoviedb.org/3/person/${id}/combined_credits`;
+	return fetchData(personCreditsAPI)
+		.then(response=>{
+			response.cast.sort((a,b) => b.popularity - a.popularity);
+			return response;
+		});
+};
+
+export const getPopularPeople = () => {
+	const popularPeopleAPI="https://api.themoviedb.org/3/person/popular";
+	return fetchData(popularPeopleAPI)
+		.then(response=>{
+			response.results.sort((a,b)=>b.popularity-a.popularity);
+			return response.results;
+		});
+};
+
+
