@@ -32,7 +32,7 @@ const styles = {
 };
 
 const MovieDetails = ( {movie}) => {
-  const [drawerOpen, setDrawerOpen] = useState(false); // New
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
     <>
@@ -54,6 +54,7 @@ const MovieDetails = ( {movie}) => {
           </li>
         ))}
       </Paper>
+
       <Paper component="ul" sx={styles.chipSet}>
         <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
         <Chip
@@ -66,6 +67,7 @@ const MovieDetails = ( {movie}) => {
         />
         <Chip label={`Released: ${movie.release_date}`} />
       </Paper>
+
       <Fab    
         color="secondary"
         variant="extended"
@@ -75,6 +77,7 @@ const MovieDetails = ( {movie}) => {
         <NavigationIcon />
         Reviews
       </Fab>
+
       <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
         <MovieReviews movie={movie} />
       </Drawer>

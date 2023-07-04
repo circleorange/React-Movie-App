@@ -1,6 +1,9 @@
 # React Movie App
 Web App based on data from TMDB
 
-## Notes
-- Demo of contexts, hooks, custom hooks, and data fetching
-- Performance optimization using caching
+## Initial Features
+- Demo of contexts, standard and custom hooks, data fetching
+- Performance optimized using client side caching
+
+## Basic Features
+- Page for most popular movies

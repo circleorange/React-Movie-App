@@ -1,74 +1,52 @@
-export const getMovies = () => {
-	return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&include_adult=false&page=1`)
-		.then(response => {
-			if (!response.ok) {throw new Error(response.json().message);}
-			return response.json();
+export const fetchData = (api) => {
+	const credParams = `?api_key=${import.meta.env.VITE_TMDB_KEY}`;
+	// const extraParams = "&language=en-US&include_adult=false&page=1"; // error with getMovieReviews
+	const request = `${api}${credParams}`;
+	console.log(request); // for debugging API
+
+	return fetch(request)
+		.then(res => {
+			if (!res.ok) {throw new Error(res.json().message);}
+			return res.json();
 		})
 		.catch(error => {throw error});
+};
+
+export const getUpcomingMovies = () => {
+	const upcomingMoviesAPI="https://api.themoviedb.org/3/movie/upcoming";
+	return fetchData(upcomingMoviesAPI);
+};
+
+export const getMovies = () => {
+	const discoverAPI="https://api.themoviedb.org/3/discover/movie";
+	return fetchData(discoverAPI);
+};
+
+export const getGenres = () => {
+	const genresAPI="https://api.themoviedb.org/3/genre/movie/list";
+	return fetchData(genresAPI);
 };
 
 export const getMovie = (args) => {
-  // console.log(args)
-  const [, idPart] = args.queryKey;
-  const { id } = idPart;
-  return fetch(
-    `https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_TMDB_KEY}`
-  ).then((response) => {
-    if (!response.ok) {
-      throw new Error(response.json().message);
-    }
-    return response.json();
-  })
-  .catch((error) => {
-    throw error
- });
+	const [, idPart] = args.queryKey;
+	const {id} = idPart;
+	const movieAPI=`https://api.themoviedb.org/3/movie/${id}`;
+	return fetchData(movieAPI);
 };
 
-export const getGenres = async () => {
-  return fetch(
-    "https://api.themoviedb.org/3/genre/movie/list?api_key=" +
-      import.meta.env.VITE_TMDB_KEY +
-      "&language=en-US"
-  ).then( (response) => {
-    if (!response.ok) {
-      throw new Error(response.json().message);
-    }
-    return response.json();
-  })
-  .catch((error) => {
-    throw error
- });
+export const getMovieImages = ({queryKey}) => {
+	const [, idPart] = queryKey;
+	const {id} = idPart;
+	const movieImageAPI=`https://api.themoviedb.org/3/movie/${id}/images`;
+	return fetchData(movieImageAPI);
 };
 
-export const getMovieImages = ({ queryKey }) => {
-  const [, idPart] = queryKey;
-  const { id } = idPart;
-  return fetch(
-    `https://api.themoviedb.org/3/movie/${id}/images?api_key=${import.meta.env.VITE_TMDB_KEY}`
-  ).then( (response) => {
-    if (!response.ok) {
-      throw new Error(response.json().message);
-    }
-    return response.json();
-
-  })
-  .catch((error) => {
-    throw error
- });
+export const getMovieReviews = async (id) => {
+	const movieReviewsAPI=`https://api.themoviedb.org/3/movie/${id}/reviews`;
+	return (await fetchData(movieReviewsAPI)).results;
 };
 
-export const getMovieReviews = (id) => {
-	return fetch(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${import.meta.env.VITE_TMDB_KEY}`)
-		.then((res) => res.json())
-		.then((json) => {return json.results});
-};
-
-
-export const getUpcomingMovies = () => {
-	return fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&include_adult=false&page=1`)
-		.then(response => {
-			if (!response.ok) {throw new Error(response.json().message);}
-			return response.json();
-		})
-		.catch(error => {throw error});
+export const getMovieCredits = (id) => {
+	const movieCreditsAPI=`https://api.themoviedb.org/3/movie/${id}/credits`;
+	return fetchData(movieCreditsAPI);
 };
