@@ -19,7 +19,8 @@ const MovieHeader = (props) => {
 	const movie = props.movie;
 	const { id } = useParams();
 	const favMovies = JSON.parse(localStorage.getItem("favourites"));
-
+	console.log('headerMovie.movie', movie);
+	
 	let isMovieFavourite = false;
 	for (const favMovie of favMovies) {
 		if (favMovie.id == id) { isMovieFavourite = true; }
