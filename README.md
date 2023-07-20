@@ -9,9 +9,10 @@ Web App based on data from TMDB
 - Demo of contexts, standard and custom hooks, data fetching
 - Performance optimized using client side caching
 
-## Next planned features
+## Next planned releases
 - Additional filtering/ sorting criteria (Producer, Actors, Company)
 - Functionality to add own movies
+- Improvements for the Actors List page
 
 ## Known issues/ bugs
 - Popular Movies List Page sorts movies by popularity but cards only show ratings

@@ -1,4 +1,4 @@
-import {Paper, Typography} from "@mui/material";
+import {Chip, Paper, Typography} from "@mui/material";
 import React from "react";
 
 const styles = {
@@ -24,7 +24,10 @@ const PersonHeader = (props) => {
 					component="h3">
 					{person.name}
 					<br />
-					<span>{person.known_for_department}</span>
+					<Chip label={`Known for: ${person.known_for_department}`} />
+					<Chip label={`Popularity: ${person.popularity}`} />
+					<Chip label={`Birthday: ${person.birthday}`} />
+					<Chip label={`Birthplace: ${person.place_of_birth}`} />
 				</Typography>
 			</Paper>
 		</>

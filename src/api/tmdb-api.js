@@ -1,6 +1,6 @@
 export const fetchData = (api) => {
   const credParams = `?api_key=${import.meta.env.VITE_TMDB_KEY}`;
-  // const extraParams = "&language=en-US&include_adult=false&page=1"; // error with getMovieReviews
+  // const extraParams = "&language=en-US&include_adult=false&page=1"; // causes errors with some API endpoints
   const request = `${api}${credParams}`;
   console.log(request); // for debugging API
 

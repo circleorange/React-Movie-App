@@ -1,9 +1,9 @@
-import React from "react";
-import Chip from "@mui/material/Chip";
+import React, {useEffect, useState} from "react";
 import Paper from "@mui/material/Paper";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import StarRate from "@mui/icons-material/StarRate";
 import Typography from "@mui/material/Typography";
+import {getPersonCredits} from '../../api/tmdb-api';
+import MovieCreditsCardList from "./movieCreditsCardList";
+import Divider from "@mui/material/Divider";
 
 const styles = {
   chipSet: {
@@ -23,43 +23,59 @@ const styles = {
     top: 50,
     right: 2,
   },
+	knownFor: {
+		marginTop: "10px",
+	},
+	biographyTitle: {
+		marginTop: "10px",
+		marginBottom: "5px",
+	},
+	biography: {
+		marginBottom: "20px",
+	} 
 };
 
 const PersonDetails = ( {person}) => {
+	const [movieCredits, setMovieCredits] = useState([]);
+	useEffect(() => {
+		getPersonCredits(person.id)
+			.then(credits => {setMovieCredits(credits.cast);});
+	}, []);
+	console.log('PersonDetails.index.movieCredits', movieCredits);
+
   return (
     <>
-      <Typography 
-				variant="h5" 
-				component="h3" 
-			>
-       Biograpghy 
-      </Typography>
+			<Typography 
+				variant="h4"
+				sx={styles.biographyTitle}>
+				Biography 
+			</Typography>
 
+			<Divider />
+			
       <Typography 
 				variant="h6" 
-				component="p" 
-			>
+				component="p"
+				sx={styles.biography}>
         {person.biography}
       </Typography>
 
+			<Typography 
+				variant="h4"
+				sx={styles.knownFor}>
+				Known For
+			</Typography>
+
+			<Divider />
+
+			{movieCredits != null ? (
       <Paper 
 				component="ul" 
-				sx={styles.chipSet}>
-        
-				<Chip 
-					icon={<AccessTimeIcon />} 
-					label={person.popularity} 
-				/>
-        
-				<Chip
-          icon={<StarRate />}
-          label={`${person.birthday}`} 
-				/>
-
-        <Chip 
-					label={`POB: ${person.place_of_birth}`} 
-				/>
-      </Paper>
+				sx={styles.chipSet}
+			>
+				<MovieCreditsCardList movieCredits={movieCredits} />
+			</Paper>
+			) : null}
     </>
   );
 };
