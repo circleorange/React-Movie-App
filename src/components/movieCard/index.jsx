@@ -17,11 +17,17 @@ import { MoviesContext } from "../../contexts/moviesContext";
 import PlaylistIcon from "@mui/icons-material/PlaylistAdd";
 
 const styles = {
-  card: { maxWidth: 345 },
+  card: { 
+		maxWidth: 345,
+		height: 750,
+	},
   media: { height: 500 },
   avatar: {
     backgroundColor: "rgb(255, 0, 0)",
   },
+	header: {
+		height: 50,
+	}
 };
 
 export default function MovieCard({movie, action}) {

@@ -10,6 +10,7 @@ const upcomingMoviesPage = () => {
 	if (isLoading) {return <Spinner />;}
 	if (isError) {return <h1>{error.message}</h1>;}
 	const movies = data ? data.results : [];
+	// console.log("pages.upcomingMoviesPage.data", data);
 
 	return(
 		<PageTemplate
