@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import Button from "@mui/material/Button";
@@ -6,12 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Card from "@mui/material/Card";
 import { v4 as uuidv4 } from "uuid";
-
-const genres = [
-  { id: 1, name: "Action" },
-  { id: 2, name: "Comedy" },
-  { id: 3, name: "Drama" },
-];
+import {getGenres} from "../../api/tmdb-api";
 
 const styles = {
 	card: {
@@ -27,6 +22,15 @@ const MovieForm = ({ onClose, onSave }) => {
   const [releaseDate, setReleaseDate] = useState(new Date());
   const [runtime, setRuntime] = useState("");
   const [productionCompany, setProductionCompany] = useState("");
+	
+	const [movieGenres, setMovieGenres] = useState([]);
+	useEffect(() => {
+		const fetchGenres = async () => {
+			const response = await getGenres();
+			setMovieGenres(response.genres);
+		};
+		fetchGenres();
+	}, []);
 
   const handleSave = () => {
     // Create a new movie object with the form data
@@ -66,7 +70,7 @@ const MovieForm = ({ onClose, onSave }) => {
         onChange={(e) => setGenre(e.target.value)}
         fullWidth
       >
-        {genres.map((genre) => (
+        {movieGenres.map((genre) => (
           <MenuItem key={genre.id} value={genre.name}>
             {genre.name}
           </MenuItem>
