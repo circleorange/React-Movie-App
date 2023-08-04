@@ -18,8 +18,6 @@ const HomePage = () => {
   const totalResults = data ? data.results.length : 0;
   const totalPages = Math.ceil(totalResults / moviesPerPage);
 
-	// console.log("totalResults", totalResults, "totalPages", totalPages, "data.results.length", data.results.length);
-
   const startIndex = (page - 1) * moviesPerPage;
   const endIndex = startIndex + moviesPerPage;
   const movies = data ? data.results.slice(startIndex, endIndex) : [];

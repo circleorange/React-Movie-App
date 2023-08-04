@@ -15,6 +15,7 @@ import PopularMoviesPage from "./pages/popularMoviesPage";
 import PeoplePage from "./pages/peoplePage";
 import MenuOptionsContext from "./contexts/menuOptionsContext";
 import PersonPage from "./pages/personDetailsPage";
+import MyMoviesPage from "./pages/myMovies";
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -32,6 +33,7 @@ const menuOptions = [
   { label: "Popular", path: "/movies/popular" },
   { label: "Favorites", path: "/movies/favourites" },
   { label: "Top Actors", path: "/people" },
+	{ label: "My Movies", path: "/movies/my-movies" },
 ];
 
 const App = () => {
@@ -54,10 +56,8 @@ const App = () => {
               <Route path="/reviews/form" element={<AddMovieReviewPage />} />
               <Route path="/movies/popular" element={<PopularMoviesPage />} />
               <Route path="/people" element={<PeoplePage />} />
-							<Route 
-								path="/people/:id" 
-								element={<PersonPage />} 
-							/>
+							<Route path="/people/:id" element={<PersonPage />} />
+							<Route path="/movies/my-movies" element={<MyMoviesPage />} />
             </Routes>
           </MoviesContextProvider>
         </BrowserRouter>
