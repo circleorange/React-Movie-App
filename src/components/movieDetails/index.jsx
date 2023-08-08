@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import MonetizationIcon from "@mui/icons-material/MonetizationOn";
 import StarRate from "@mui/icons-material/StarRate";
 import Typography from "@mui/material/Typography";
-
 import NavigationIcon from "@mui/icons-material/Navigation";
 import Fab from "@mui/material/Fab";
 import Drawer from "@mui/material/Drawer";
 import MovieReviews from '../movieReviews'
+import {getMovieCast} from "../../api/tmdb-api";
+import CardList from "./cardList";
+import Divider from "@mui/material/Divider";
 
 const styles = {
   chipSet: {
@@ -29,20 +31,33 @@ const styles = {
     top: 50,
     right: 2,
   },
+	header: {
+		marginTop: "15px",
+	},
 };
 
 const MovieDetails = ( {movie}) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+	const [movieCast, setMovieCast] = useState([]);
+	useEffect(() => {
+		getMovieCast(movie.id)
+			.then(response => {
+				setMovieCast(response);}
+			);
+	}, []);
+	console.log("movie cast", movieCast);
 
   return (
     <>
-      <Typography variant="h5" component="h3">
-        Overview
-      </Typography>
+      <Typography variant="h4" component="h3" sx={styles.header}>Overview</Typography>
 
-      <Typography variant="h6" component="p">
-        {movie.overview}
-      </Typography>
+			<Divider /> 
+
+      <Typography variant="h6" component="p">{movie.overview}</Typography>
+
+      <Typography variant="h4" component="h3" sx={styles.header}>Details</Typography>
+
+			<Divider /> 
 
       <Paper component="ul" sx={styles.chipSet}>
         <li>
@@ -67,6 +82,20 @@ const MovieDetails = ( {movie}) => {
         />
         <Chip label={`Released: ${movie.release_date}`} />
       </Paper>
+
+			<Typography
+				variant="h4"
+				sx={styles.header}>
+				Cast
+			</Typography>
+
+			<Divider /> 
+
+			{movieCast != null ? (
+				<Paper component="ul" sx={styles.chipSet}>
+					<CardList cast={movieCast} />
+				</Paper>
+			) : null}
 
       <Fab    
         color="secondary"

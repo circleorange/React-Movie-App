@@ -55,8 +55,7 @@ export const getMovieReviews = (id) => {
 export const getMovieCast = (id) => {
   const movieCastAPI = `https://api.themoviedb.org/3/movie/${id}/credits`;
   return fetchData(movieCastAPI).then((response) => {
-    response.cast.sort((a, b) => b.popularity - a.popularity);
-    return response.cast;
+    return response.cast.sort((a, b) => b.popularity - a.popularity);
   });
 };
 
