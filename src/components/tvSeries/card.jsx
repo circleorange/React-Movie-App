@@ -59,17 +59,17 @@ export default function TvCard({serie, action}) {
 				}
 			/>
 			<CardContent>
-				<Grid container>
+				<Grid container direction="column">
 					<Grid item xs={6}>
 						<Typography variant="h6" component="p">
 							<CalendarIcon fontSize="small" />
-							Since: {serie.first_air_date}
+							{"  "} First Aired On: {serie.first_air_date}
 						</Typography>
 					</Grid>
 					<Grid item xs={6}>
 						<Typography variant="h6" component="p">
 							<StarRateIcon fontSize="small" />
-							{"  "} {serie.vote_average}{" "}
+							{"  "}  Average Vote: {serie.vote_average}{" "}
 						</Typography>
 					</Grid>
 				</Grid>

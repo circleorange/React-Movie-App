@@ -14,7 +14,7 @@ const {data, error, isLoading, isError} = useQuery("people", getPopularPeople);
 
 	return(
 		<PageTemplate
-			title='Best Actors by Rating'
+			title='Current Top Actors'
 			people={people}	
 		/>
 	)

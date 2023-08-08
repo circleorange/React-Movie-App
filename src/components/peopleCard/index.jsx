@@ -31,10 +31,9 @@ export default function PeopleCard({person}) {
         }
       />
       <CardContent>
-        <Grid container>
+        <Grid container direction="column" alignItems="center">
           <Grid item xs={6}>
             <Typography variant="h6" component="p">
-              <CalendarIcon fontSize="small" />
               {person.name}
             </Typography>
           </Grid>
@@ -49,7 +48,7 @@ export default function PeopleCard({person}) {
       <CardActions disableSpacing>
         <Link to={`/people/${person.id}`}>
           <Button variant="outlined" size="medium" color="primary">
-            More Info ...
+            More Info
           </Button>
         </Link>
       </CardActions>
