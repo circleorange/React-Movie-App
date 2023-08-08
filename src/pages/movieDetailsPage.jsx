@@ -14,14 +14,6 @@ const MovieDetailsPage = (props) => {
     getMovie
   );
 
-	async function test() {
-		if (id != null) {
-			let response = await getMovieCast(id);
-			console.log(response);
-		}
-	};
-	test();
-
   if (isLoading) {return <Spinner />;}
   if (isError) {return <h1>{error.message}</h1>;}
 

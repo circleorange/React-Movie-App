@@ -16,6 +16,7 @@ import PeoplePage from "./pages/peoplePage";
 import MenuOptionsContext from "./contexts/menuOptionsContext";
 import PersonPage from "./pages/personDetailsPage";
 import MyMoviesPage from "./pages/myMovies";
+import TvSeriesPage from "./pages/tvSeriesPage";
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -31,6 +32,7 @@ const menuOptions = [
   { label: "Home", path: "/" },
   { label: "Upcoming", path: "/movies/upcoming" },
   { label: "Popular", path: "/movies/popular" },
+	{ label: "TV Series", path: "/tv" },
   { label: "Favorites", path: "/movies/favourites" },
   { label: "Top Actors", path: "/people" },
 	{ label: "My Movies", path: "/movies/my-movies" },
@@ -58,6 +60,7 @@ const App = () => {
               <Route path="/people" element={<PeoplePage />} />
 							<Route path="/people/:id" element={<PersonPage />} />
 							<Route path="/movies/my-movies" element={<MyMoviesPage />} />
+							<Route path="/tv" element={<TvSeriesPage />} />
             </Routes>
           </MoviesContextProvider>
         </BrowserRouter>

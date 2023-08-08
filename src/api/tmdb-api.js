@@ -99,3 +99,8 @@ export const getPersonImages = ({ queryKey }) => {
   const personImageAPI = `https://api.themoviedb.org/3/person/${id}/images`;
   return fetchData(personImageAPI);
 };
+
+export const getPopularTvSeries = () => {
+  const popularTvSeriesAPI = "https://api.themoviedb.org/3/tv/popular";
+  return fetchData(popularTvSeriesAPI);
+};
