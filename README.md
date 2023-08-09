@@ -13,11 +13,11 @@ __Name:__ Piotr Bielski
 ## UI Designs
 ### Popular Movies
 > List of popular movies from TMDB endpoint
-![][popularMovies]
+![Popular Movies](https://raw.githubusercontent.com/circleorange/React-Movie-App/main/images/popularMovies.png)
 
 ### TV Series
 > List TV series from TMDB endpoint
-![][tvSeries]
+![TV Series](https://raw.githubusercontent.com/circleorange/React-Movie-App/images/tvSeries.png)
 
 ### TV Series Detail View
 > Detailed page of the TV series
@@ -36,4 +36,6 @@ Application is deployed on Vercel
 URL: https://react-movie-app-git-master-circleorange.vercel.app/
 
 ## Additional Information
-+ Data is displayed in relevant order, e.g. on Movie Details View > Cast section, actors are listed based on their popularity rating. Similar approach is applied to movies listed in Known For section with most popular movies listed in descending order.
++ Data is displayed in relevant order, e.g. on Movie Detail
+
+When uploaded to github, the images are not showing on the README pageils View > Cast section, actors are listed based on their popularity rating. Similar approach is applied to movies listed in Known For section with most popular movies listed in descending order.
