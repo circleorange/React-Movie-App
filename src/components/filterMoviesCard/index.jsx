@@ -12,6 +12,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useQuery } from "react-query";
 import Spinner from "../spinner";
+import Button from "@mui/material/Button";
 
 const styles = {
   root: {
@@ -24,6 +25,9 @@ const styles = {
     minWidth: 220,
     backgroundColor: "rgb(255, 255, 255)",
   },
+	sorting: {
+		marginBottom: "10px",
+	}
 };
 
 export default function FilterMoviesCard(props) {
@@ -41,6 +45,9 @@ export default function FilterMoviesCard(props) {
   };
   const handleTextChange = (e, props) => {handleUserImput(e, "title", e.target.value);};
   const handleGenreChange = (e) => {handleUserImput(e, "genre", e.target.value);};
+	const handleSortChange = (order) => {
+		props.onUserInput("sort", order);
+	}
 
   return (
     <>
@@ -83,12 +90,27 @@ export default function FilterMoviesCard(props) {
     </Card>
     <Card sx={styles.root} variant="outlined">
         <CardContent>
-          <Typography variant="h5" component="h1">
-            <SortIcon fontSize="large" />
-            Sort the movies.
-          </Typography>
-        </CardContent>
-      </Card>
+					<Typography variant="h5" component="h1" sx={styles.sorting}>
+						<SortIcon fontSize="large" />
+						Sort movies by title					
+					</Typography>
+
+					<Button
+						variant="outlined"
+						onClick={() => handleSortChange("asc")}
+					>
+						Ascending
+					</Button>
+
+					<Button
+						variant="outlined"
+						onClick={() => handleSortChange("desc")}
+						style={{ marginLeft: "10px" }}
+					>
+						Descending
+					</Button>
+				</CardContent>
+		</Card>
       </>
   );
 }

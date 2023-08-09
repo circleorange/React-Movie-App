@@ -38,8 +38,6 @@ const SeriesDetails = ({series}) => {
 			);
 	}, []);
 
-	console.log("series cast", seriesCast);
-
   return (
     <>
       <Typography variant="h4" component="h3" sx={styles.header}>Overview</Typography>

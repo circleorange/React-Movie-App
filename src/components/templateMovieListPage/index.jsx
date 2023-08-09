@@ -24,21 +24,34 @@ const styles = {
 function MovieListPageTemplate({ movies, title, action }) {
 	const [titleFilter, setTitleFilter] = useState("");
 	const [genreFilter, setGenreFilter] = useState("0");
+	const [sortingOrder, setSortingOrder] = useState(null);
 	const [drawerOpen, setDrawerOpen] = useState(false);
 
 	const genreID = Number(genreFilter);
+
 	let displayedMovies = movies
 		.filter((m) => {
-		return m.title.toLowerCase().search(titleFilter.toLowerCase()) != -1;
-	})
+			return m.title.toLowerCase().search(titleFilter.toLowerCase()) != -1;
+		})
 		.filter((m) => {
-		return genreID > 0 ? m.genre_ids.includes(genreID) : true;
-	});
+			return genreID > 0 ? m.genre_ids.includes(genreID) : true;
+		})
+		.sort((a, b) => {
+			if (sortingOrder === "asc") {
+				return a.title.localeCompare(b.title);
+			} else if (sortingOrder === "desc") {
+				return b.title.localeCompare(a.title);
+			}
+			return 0;
+		});
+
 
 	const handleChange = (type, value) => {
-		if(type === "title") setTitleFilter(value);
-		else setGenreFilter(value);
+		if (type === "title") setTitleFilter(value);
+		else if (type === "genre") setGenreFilter(value);
+		else if (type === "sort") setSortingOrder(value);
 	};
+
 
 	return(
 		<>
