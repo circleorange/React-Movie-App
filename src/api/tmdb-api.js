@@ -103,3 +103,24 @@ export const getPopularTvSeries = () => {
   const popularTvSeriesAPI = "https://api.themoviedb.org/3/tv/popular";
   return fetchData(popularTvSeriesAPI);
 };
+
+export const getSeries = (args) => {
+  const [, idPart] = args.queryKey;
+  const { id } = idPart;
+  const seriesDetailsAPI = `https://api.themoviedb.org/3/tv/${id}`;
+  return fetchData(seriesDetailsAPI);
+};
+
+export const getSeriesImages = ({ queryKey }) => {
+  const [, idPart] = queryKey;
+  const { id } = idPart;
+  const seriesImageAPI = `https://api.themoviedb.org/3/tv/${id}/images`;
+  return fetchData(seriesImageAPI);
+};
+
+export const getSeriesCredits = (id) => {
+  const creditsAPI = `https://api.themoviedb.org/3/tv/${id}/credits`;
+  return fetchData(creditsAPI).then((response) => {
+    return response.cast.sort((a, b) => b.popularity - a.popularity);
+  });
+};

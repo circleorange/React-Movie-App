@@ -17,6 +17,7 @@ import MenuOptionsContext from "./contexts/menuOptionsContext";
 import PersonPage from "./pages/personDetailsPage";
 import MyMoviesPage from "./pages/myMovies";
 import TvSeriesPage from "./pages/tvSeriesPage";
+import SeriesDetailsPage from "./pages/seriesDetailsPage";
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -61,6 +62,7 @@ const App = () => {
 							<Route path="/people/:id" element={<PersonPage />} />
 							<Route path="/movies/my-movies" element={<MyMoviesPage />} />
 							<Route path="/tv" element={<TvSeriesPage />} />
+              <Route path="/tv/:id" element={<SeriesDetailsPage />} />
             </Routes>
           </MoviesContextProvider>
         </BrowserRouter>
