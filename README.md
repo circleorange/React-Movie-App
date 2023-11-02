@@ -1,6 +1,3 @@
-# Full Stack Development 2 - Assignment
-__Name:__ Piotr Bielski
-
 ## Features
 + Sorting based on movie title
 + Pagination of movie list on Home page and on Details View pages
